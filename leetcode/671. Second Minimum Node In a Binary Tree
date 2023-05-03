@@ -1,0 +1,28 @@
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution:
+    
+    
+    def pre(self, root: TreeNode, nums):
+        if root == None:
+            return nums
+        nums.append(root.val)
+        self.pre(root.left, nums)
+        self.pre(root.right, nums)
+        
+    
+    def findSecondMinimumValue(self, root: TreeNode) -> int:
+        nums = list()
+        self.pre(root, nums)
+        nums = set(nums)
+        if len(nums)<2:
+            return -1
+        else:
+            nums = sorted(nums, reverse=False)
+            return nums[1]
+        

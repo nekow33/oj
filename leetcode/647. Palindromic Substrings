@@ -1,0 +1,26 @@
+class Solution:
+    def countSubstrings(self, s):
+        """
+        :type s: str
+        :rtype: int
+        """
+        l = len(s)
+        dp = []
+        for i in range(l):
+            dp.append([])
+            for j in range(l):
+                dp[i].append(False)
+        res = 0
+        for i in range(l-1,-1,-1):
+            for j in range(i,l):
+                if (s[i] == s[j]):
+                    if (j-i) < 3:
+                        dp[i][j] = True
+                    elif dp[i+1][j-1] == True:
+                        dp[i][j] = True
+                else:
+                    dp[i][j] = False
+                if dp[i][j]:
+                    res += 1
+        return res
+                

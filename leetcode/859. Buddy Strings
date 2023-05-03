@@ -1,0 +1,30 @@
+class Solution:
+    def buddyStrings(self, A, B):
+        """
+        :type A: str
+        :type B: str
+        :rtype: bool
+        """
+        if len(A)!=len(B):
+            return False
+        buddy = []
+        seen=set()
+        if A == B:
+            for a in A:
+                if a in seen:
+                    return True
+                seen.add(a)
+            return False
+        for i in range(len(A)):
+            if A[i] != B[i]:
+                buddy.append((A[i],B[i]))
+                if len(buddy)>2:
+                    return False
+        if len(buddy) < 2:
+            return False
+        else:
+            if (buddy[0][0] == buddy[-1][-1]) and (buddy[0][-1] == buddy[-1][-0]):
+                return True
+            else:
+                return False
+            

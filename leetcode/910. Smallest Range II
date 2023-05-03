@@ -1,0 +1,14 @@
+class Solution:
+    def smallestRangeII(self, A: List[int], K: int) -> int:
+        
+        A.sort()
+        
+        m = A[-1] - A[0]
+        mx = A[-1]
+        mn = A[0]
+        
+        for i in range(len(A)-1):
+            mx = max(A[i]+2*K, mx)
+            mn = min(A[i+1], A[0]+2*K)
+            m = min(m, mx-mn)
+        return m

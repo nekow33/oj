@@ -1,0 +1,31 @@
+class Solution:
+    def updateMatrix(self, matrix):
+        """
+        :type matrix: List[List[int]]
+        :rtype: List[List[int]]
+        """
+        height = len(matrix)-1
+        if height<0:
+            return matrix
+        width = len(matrix[0])-1
+        end = False
+        s=0
+        while(end != True):
+            end = True
+            for i in range(0,height+1):
+                for j in range(0,width+1):
+                    if(matrix[i][j]>s):
+                        end = False
+                        get = False
+                        if j-1>=0 and matrix[i][j-1]==s:
+                            get = True
+                        elif j+1<=width and matrix[i][j+1]==s:
+                            get = True
+                        elif i+1<=height and matrix[i+1][j]==s:
+                            get = True
+                        elif i-1>=0 and matrix[i-1][j]==s:
+                            get = True
+                        if get != True:
+                            matrix[i][j]=matrix[i][j]+1
+            s=s+1
+        return matrix  

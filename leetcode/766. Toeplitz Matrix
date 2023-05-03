@@ -1,0 +1,50 @@
+class Solution:
+    def isToeplitzMatrix(self, matrix):
+        """
+        :type matrix: List[List[int]]
+        :rtype: bool
+        """
+        # function 88ms
+        # rows = len(matrix)
+        # if rows == 1:
+        #     return True
+        # cols = len(matrix[0])
+        # if cols == 1:
+        #     return True
+        # for r in range(1,rows):
+        #     for c in range(1, cols):
+        #         cur = matrix[r][c]
+        #         if (matrix[r-1][c-1] != cur):
+        #             return False
+        # return True
+        
+        # function 84ms
+        # return all(r == 0 or c == 0 or matrix[r-1][c-1] == val
+        #            for r, row in enumerate(matrix)
+        #            for c, val in enumerate(row))
+        
+        # function 116ms
+        # groups = {}
+        # rows = len(matrix)
+        # cols = len(matrix[0])
+        # for r in range(rows):
+        #     for c in range(cols):
+        #         val = matrix[r][c]
+        #         group = r-c
+        #         if group in groups:
+        #             if (val != groups.get(group)):
+        #                 return False
+        #         else:
+        #             groups[group] = val
+        # return True
+        
+        m = len(matrix)
+        n = len(matrix[0])
+        
+        for i in range(m-1):
+            if matrix[i][i:-1]!=matrix[i+1][i+1:]:
+                return False
+        for j in range(m-1,1,-1):
+            if matrix[j][1:]!=matrix[j-1][:-1]:
+                return False
+        return True

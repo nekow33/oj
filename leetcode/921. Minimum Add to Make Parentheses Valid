@@ -1,0 +1,13 @@
+class Solution:
+    def minAddToMakeValid(self, S):
+        """
+        :type S: str
+        :rtype: int
+        """
+        res = []
+        for p in S:
+            if res and (p==')') and (res[-1] == '('):
+                res.pop()
+            else:
+                res.append(p)
+        return len(res)

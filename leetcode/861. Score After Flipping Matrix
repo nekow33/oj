@@ -1,0 +1,46 @@
+class Solution:
+    def matrixScore(self, A):
+        """
+        :type A: List[List[int]]
+        :rtype: int
+        """
+        def reverserow(A,i):
+            l = len(A[i])
+            for index in range(l):
+                if A[i][index] == 0:
+                    A[i][index] = 1
+                else:
+                    A[i][index] =0
+
+        def reversecol(A,j):
+            for i in range(len(A)):
+                if A[i][j] == 0:
+                    A[i][j] = 1
+                else:
+                    A[i][j] = 0
+    
+        def count(A):
+            s = 0
+            for i in range(len(A)):
+                l = len(A[i])
+                for j in range(len(A[i])):
+                    s = s + A[i][j]*(2**(l-j-1))
+            return s
+        
+        if not A:
+            return 0
+        for i in range(len(A)):
+            if A[i][0] == 0:
+                reverserow(A,i)
+        for j in range(len(A[0])):
+            num0=0
+            num1=0
+            for i in range(len(A)):
+                if(A[i][j]==0):
+                    num0 = num0+1
+                else:
+                    num1 = num1+1
+            if num0 > num1:
+                reversecol(A,j)
+        return count(A)
+    

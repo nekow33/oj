@@ -1,0 +1,7 @@
+class Solution:
+    def prefixesDivBy5(self, A: List[int]) -> List[bool]:
+        answer = [0 for i in A]       
+        for i in range(len(A)):
+            temp = answer[i-1]*2 + A[i]
+            answer[i] = temp % 5
+        return [i==0 for i in answer]

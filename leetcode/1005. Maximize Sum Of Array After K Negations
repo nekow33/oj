@@ -1,0 +1,28 @@
+class Solution:
+    def largestSumAfterKNegations(self, A: List[int], K: int) -> int:
+        
+        # i = 0
+        # while(i < K):
+        #     A.sort()
+        #     A[0] = -A[0]
+        #     i += 1
+        # return sum(A)
+        A.sort()
+        neg = [i for i in A if i<0]
+        pos = [i for i in A if i>=0]
+        
+        res = [ ]
+    
+        for n in neg:
+            if K:
+                res.append(-1*n)
+                K -= 1
+            else:
+                res.append(n)
+        
+        res = sorted(res + pos)
+        
+        if K%2 == 1:
+            res[0] = -1 * res[0]
+            
+        return sum(res)
